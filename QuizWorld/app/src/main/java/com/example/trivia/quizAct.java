@@ -1,6 +1,8 @@
 package com.example.trivia;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,7 +25,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.bawp.trivia.controller.AppController;
 import com.bawp.trivia.data.AnswerListAsyncResponse;
 import com.bawp.trivia.model.Question;
+import com.bawp.trivia.util.AppUtil;
 import com.bawp.trivia.util.Prefs;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +47,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 
 public class quizAct extends AppCompatActivity implements View.OnClickListener {
-
+    final static int RESULT_CLOSE_ALL=0;
     int catIndex;
     int category;
     int correctNbr=0;
@@ -55,7 +63,9 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
     private ImageButton next;
     private int currentQuestionIndex = 0;
     private int score = 0;
+    private AdView mAdView;
     private Prefs pref;
+    AppUtil appUtil;
     private ProgressBar progress;
     ConstraintLayout quizScreen;
     ArrayList<Question> questions = new ArrayList<Question>();
@@ -66,6 +76,17 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_quiz);
+
+        //initialize mobile Ad format
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         Bundle bundle = getIntent().getExtras();
         category = bundle.getInt("category");
@@ -91,7 +112,7 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         opt4.setOnClickListener(this);
 
         pref = new Prefs(quizAct.this);
-
+        appUtil = new AppUtil(this);
 
         getQuestions(new AnswerListAsyncResponse() {
             @Override
@@ -107,18 +128,15 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
                 highScore.setText(MessageFormat.format("Highest score: {0}", pref.getHighScore()));
             }
         });
-
-//            setQuizView();
     }
-
-
+   
+    
     public void onClick(View v) {
         int optnbr = 0;
         switch (v.getId()) {
             case R.id.next_button:
                 if (currentQuestionIndex == 4) {
                     //   show finalScore();
-                    Log.d("activity change", "go to FinalScore");
                     Intent i= new Intent(quizAct.this, finalScore.class);
                     i.putExtra("score", score);
                     i.putExtra("correctNbr", correctNbr);
@@ -150,7 +168,9 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-
+    /*
+    @brief  Check whether the user presses the Correct answer(button) and update Score
+    */
     private void checkAnswer(String optText, int optnbr) {
         String answer = answerData.get(currentQuestionIndex).getCorrectAnswer();
         switch (optnbr) {
@@ -158,8 +178,6 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
             case 2:
             case 3:
             case 4:
-                Log.d("optText", optText);
-                Log.d("answer", answer);
                 if (optText == answer) {
                     fadeView();
                     score = score + 500;
@@ -174,8 +192,9 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-
-    //Pass the Button where Answer is
+    /*
+    @brief  Pass the Button where Answer is
+    */
     private void viewAnswer() {
         int optAns = answerData.get(currentQuestionIndex).getAnsOpt();
         switch (optAns) {
@@ -194,7 +213,9 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-
+    /*
+    @breif  Cardview fades once the user presses Correct button.
+    */
     private void fadeView() {
         final CardView cardView = findViewById(R.id.cardView);
         AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
@@ -232,7 +253,10 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
-    
+    /*
+    @brief  Cardview and the Button pressed shake if the user presses wrong button.
+    @param  the button the user pressed
+     */
     private void shakeAnimation(Button ansButton) {
         Animation shake = AnimationUtils.loadAnimation(quizAct.this,
                 R.anim.shake_animation);
@@ -273,7 +297,9 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
-
+    /*
+    @brief  Show New questions and Answer options(Button) on the screen
+     */
     private void updateQuestion() {
         q.setText(Html.fromHtml(questions.get(currentQuestionIndex).getQuestion()));
         counter.setText(currentQuestionIndex + " / " + questions.size());
@@ -283,42 +309,86 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         opt4.setText(Html.fromHtml(questions.get(currentQuestionIndex).getOpt4()));
     }
 
-
+    /*
+    @brief  Fetch Json data if the network is connected.
+    @param  Interface callback to make sure fetching Json data is completed.
+     */
     public void getQuestions(final AnswerListAsyncResponse callBack) {
-        String url = "https://opentdb.com/api.php?amount=5&category=" + category + "&type=multiple";
-        final ProgressDialog dialog = ProgressDialog.show(this, null, "Please Wait");
         quizScreen.setVisibility(View.INVISIBLE);
+        //check Network connection before fetching Json data
+        if(appUtil.isNetworkConnectionAvailable()==false){
+            netWorkAlertDialog();
+        }
 
-        final JsonObjectRequest jsObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                dialog.dismiss();
-                quizScreen.setVisibility(View.VISIBLE);
-                try {
-                    parseResponse(response);
-                    callBack.processFinished(questions);
-                } catch (JSONException e) {
-                    Toast.makeText(quizAct.this, "Network error " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        dialog.dismiss();
-                        Toast.makeText(quizAct.this, "Network error " + error.getMessage(), Toast.LENGTH_LONG).show();
-                        error.printStackTrace();
+        else {
+            String url = "https://opentdb.com/api.php?amount=5&category=" + category + "&type=multiple";
+            final ProgressDialog dialog = ProgressDialog.show(this, null, "Loading..Please Wait");
+
+            final JsonObjectRequest jsObjectRequest = new JsonObjectRequest(
+                    Request.Method.GET,
+                    url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    dialog.dismiss();
+                    quizScreen.setVisibility(View.VISIBLE);
+                    try {
+                        parseResponse(response);
+                        callBack.processFinished(questions);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(quizAct.this, "Loading... Please wait...", Toast.LENGTH_LONG).show();
                     }
-                });
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            dialog.dismiss();
+                            Toast.makeText(quizAct.this, "Loading...", Toast.LENGTH_LONG).show();
+                            error.printStackTrace();
+                        }
+                    });
 
-        AppController.getInstance().addToRequestQueue(jsObjectRequest);
-
+            AppController.getInstance().addToRequestQueue(jsObjectRequest);
+        }
     }
 
+    /*
+    @brief  AlertDialog where the User choose whether to retry connection or Exit app.
+    */
+    public void netWorkAlertDialog(){
+        AlertDialog.Builder builder =new AlertDialog.Builder(this);
+        builder.setTitle("No internet Connection");
+        builder.setMessage("Network error occur: Retry or Close?");
+        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d("onclick", "onclick starts");
+                dialog.dismiss();
+                //Reload activity
+                finish();
+                startActivity(getIntent());
+            }
+        }).show();
 
+        builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                setResult(RESULT_CLOSE_ALL);
+                finish();
+            }
+        }).show();
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    /*
+    @brief  Parse fetched Json data
+    @param  Fetched Json data
+    */
     public void parseResponse(JSONObject response) throws JSONException {
         int code = Integer.parseInt(response.getString("response_code"));
         if (code == 0) {
@@ -361,8 +431,14 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onPause() {
-        Log.d("App in Pause stat", "App in pause");
         pref.getHighScore();
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent new_intent = new Intent(this, categoryPick.class);
+        new_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        this.startActivity(new_intent);
     }
 }
