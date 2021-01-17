@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trivia</string>
+    <string name="app_name">QuizWorld</string>
     <string name="hi">hello</string>
     <string name="false_title">false</string>
     <string name="true_title">true</string>
