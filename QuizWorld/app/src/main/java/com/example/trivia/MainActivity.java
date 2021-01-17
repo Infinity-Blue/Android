@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        apptitle= findViewById(R.id.apptitle);
+        apptitle.setTypeface(ResourcesCompat.getFont(this, R.font.lemon));
 
         //initialize mobile Ad format
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
