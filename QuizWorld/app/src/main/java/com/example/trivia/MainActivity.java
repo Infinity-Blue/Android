@@ -13,6 +13,8 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.example.trivia.quizAct.RESULT_CLOSE_ALL;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button next;
@@ -34,13 +36,12 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-
         next= findViewById(R.id.playButton);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent= new Intent(MainActivity.this, categoryPick.class);
-                startActivity(myIntent);
+                startActivityForResult(myIntent, 1);
             }
         });
     }
@@ -48,5 +49,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         MainActivity.this.finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(resultCode)
+        {
+            case RESULT_CLOSE_ALL:
+                setResult(RESULT_CLOSE_ALL);
+                finish();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
