@@ -5,7 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import static com.example.trivia.quizAct.RESULT_CLOSE_ALL;
 
 public class categoryPick<category> extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,12 +29,25 @@ public class categoryPick<category> extends AppCompatActivity implements View.On
     private Button topic_9;
     private Button topic_10;
     int category;
+    ConstraintLayout constLay;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_category_pick);
+
+        //initialize mobile Ad format
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         topic_1 = findViewById(R.id.topic1);
         topic_2 = findViewById(R.id.topic2);
         topic_3 = findViewById(R.id.topic3);
@@ -85,7 +107,7 @@ public class categoryPick<category> extends AppCompatActivity implements View.On
             }
             Intent intent= new Intent(categoryPick.this, quizAct.class);
             intent.putExtra("category", category);
-            startActivity(intent);
+            startActivityForResult(intent,1);
         }
 
     @Override
@@ -93,6 +115,17 @@ public class categoryPick<category> extends AppCompatActivity implements View.On
         Intent new_intent = new Intent(this, MainActivity.class);
         new_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         this.startActivity(new_intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(resultCode)
+        {
+            case RESULT_CLOSE_ALL:
+                setResult(RESULT_CLOSE_ALL);
+                finish();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
 
