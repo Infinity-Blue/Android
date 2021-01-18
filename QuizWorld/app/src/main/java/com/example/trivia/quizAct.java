@@ -61,7 +61,7 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
     private Button opt4;
     private ImageButton prev;
     private ImageButton next;
-    private int currentQuestionIndex = 0;
+    private int currentQuestionIndex = 1;
     private int score = 0;
     private AdView mAdView;
     private Prefs pref;
@@ -129,13 +129,13 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
             }
         });
     }
-   
-    
+
+
     public void onClick(View v) {
         int optnbr = 0;
         switch (v.getId()) {
             case R.id.next_button:
-                if (currentQuestionIndex == 4) {
+                if (currentQuestionIndex == 10) {
                     //   show finalScore();
                     Intent i= new Intent(quizAct.this, finalScore.class);
                     i.putExtra("score", score);
@@ -148,23 +148,23 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
                 }
                 break;
             case R.id.prev_button:
-                if (currentQuestionIndex <= 0) {
+                if (currentQuestionIndex <= 1) {
                     onBackPressed();
                 }
                 currentQuestionIndex--;
                 updateQuestion();
                 break;
             case R.id.opt1:
-                checkAnswer(questions.get(currentQuestionIndex).getOpt1(), 1);
+                checkAnswer(questions.get(currentQuestionIndex-1).getOpt1(), 1);
                 break;
             case R.id.opt2:
-                checkAnswer(questions.get(currentQuestionIndex).getOpt2(), 2);
+                checkAnswer(questions.get(currentQuestionIndex-1).getOpt2(), 2);
                 break;
             case R.id.opt3:
-                checkAnswer(questions.get(currentQuestionIndex).getOpt3(), 3);
+                checkAnswer(questions.get(currentQuestionIndex-1).getOpt3(), 3);
                 break;
             case R.id.opt4:
-                checkAnswer(questions.get(currentQuestionIndex).getOpt4(), 4);
+                checkAnswer(questions.get(currentQuestionIndex-1).getOpt4(), 4);
                 break;
         }
     }
@@ -173,7 +173,7 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
     @brief  Check whether the user presses the Correct answer(button) and update Score
     */
     private void checkAnswer(String optText, int optnbr) {
-        String answer = answerData.get(currentQuestionIndex).getCorrectAnswer();
+        String answer = answerData.get(currentQuestionIndex-1).getCorrectAnswer();
         switch (optnbr) {
             case 1:
             case 2:
@@ -197,7 +197,7 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
     @brief  Pass the Button where Answer is
     */
     private void viewAnswer() {
-        int optAns = answerData.get(currentQuestionIndex).getAnsOpt();
+        int optAns = answerData.get(currentQuestionIndex-1).getAnsOpt();
         switch (optAns) {
             case 1:
                 shakeAnimation(opt1);
@@ -221,7 +221,7 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         final CardView cardView = findViewById(R.id.cardView);
         AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
 
-        alphaAnimation.setDuration(300);
+        alphaAnimation.setDuration(250);
         alphaAnimation.setRepeatCount(1);
         alphaAnimation.setRepeatMode(Animation.REVERSE);
         cardView.startAnimation(alphaAnimation);
@@ -235,7 +235,7 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onAnimationEnd(Animation animation) {
                 cardView.setCardBackgroundColor(Color.WHITE);
-                if (currentQuestionIndex == 4) {
+                if (currentQuestionIndex == 10) {
                     //   show finalScore();
                     Intent i = new Intent(quizAct.this, finalScore.class);
                     i.putExtra("score", score);
@@ -278,14 +278,14 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
                 cardView.setCardBackgroundColor(Color.WHITE);
                 finalAnsButton.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 
-                if (currentQuestionIndex == 4) {
+                if (currentQuestionIndex == 10) {
                     //   show finalScore();
                     Intent i = new Intent(quizAct.this, finalScore.class);
                     i.putExtra("score", score);
                     i.putExtra("correctNbr", correctNbr);
                     startActivity(i);
                 }
-                else {
+                else {   Log.d("question index", String.valueOf(currentQuestionIndex));
                     currentQuestionIndex++;
                     updateQuestion();
                 }
@@ -302,12 +302,12 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
     @brief  Show New questions and Answer options(Button) on the screen
      */
     private void updateQuestion() {
-        q.setText(Html.fromHtml(questions.get(currentQuestionIndex).getQuestion()));
+        q.setText(Html.fromHtml(questions.get(currentQuestionIndex-1).getQuestion()));
         counter.setText(currentQuestionIndex + " / " + questions.size());
-        opt1.setText(Html.fromHtml(questions.get(currentQuestionIndex).getOpt1()));
-        opt2.setText(Html.fromHtml(questions.get(currentQuestionIndex).getOpt2()));
-        opt3.setText(Html.fromHtml(questions.get(currentQuestionIndex).getOpt3()));
-        opt4.setText(Html.fromHtml(questions.get(currentQuestionIndex).getOpt4()));
+        opt1.setText(Html.fromHtml(questions.get(currentQuestionIndex-1).getOpt1()));
+        opt2.setText(Html.fromHtml(questions.get(currentQuestionIndex-1).getOpt2()));
+        opt3.setText(Html.fromHtml(questions.get(currentQuestionIndex-1).getOpt3()));
+        opt4.setText(Html.fromHtml(questions.get(currentQuestionIndex-1).getOpt4()));
     }
 
     /*
@@ -322,7 +322,7 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         }
 
         else {
-            String url = "https://opentdb.com/api.php?amount=5&category=" + category + "&type=multiple";
+            String url = "https://opentdb.com/api.php?amount=10&category=" + category + "&type=multiple";
             final ProgressDialog dialog = ProgressDialog.show(this, null, "Loading..Please Wait");
 
             final JsonObjectRequest jsObjectRequest = new JsonObjectRequest(
