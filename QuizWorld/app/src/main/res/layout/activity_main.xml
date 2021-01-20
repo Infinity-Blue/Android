@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constLay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222288"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="163dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="196dp"
+        android:background="@drawable/roundbutton"
+        android:text="@string/playButton"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apptitle" />
+
+    <TextView
+        android:id="@+id/apptitle"
+        android:layout_width="276dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="136dp"
+        android:fontFamily="@font/lemons"
+        android:text="@string/appTitle"
+        android:textColor="#F4E4E4"
+        android:textColorHighlight="#951C1C"
+        android:textSize="44sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="ca-app-pub-5560055586644645~1110608367"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_alignParentBottom="true"
+        tools:layout_editor_absoluteX="-5dp"></com.google.android.gms.ads.AdView>
+
+    <!--    <com.google.android.gms.ads.AdView-->
+<!--        android:id="@+id/adView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        app:adSize="BANNER"-->
+<!--        app:adUnitId="ca-app-pub-3940256099942544/6300978111"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        tools:layout_editor_absoluteX="45dp"></com.google.android.gms.ads.AdView>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

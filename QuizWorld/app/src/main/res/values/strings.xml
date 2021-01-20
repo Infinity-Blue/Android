@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">QuizWorld:"\n"Funtime</string>
+    <string name="hi">hello</string>
+    <string name="false_title">false</string>
+    <string name="true_title">true</string>
+    <string name="previous_button">previous button</string>
+    <string name="next_button">next button</string>
+    <string name="counter_questions">0/10</string>
+    <string name="correct_answer">correct</string>
+    <string name="wrong_answer">wrong</string>
+    <string name="appTitle">Quiz World</string>
+    <string name="playButton">PLAY</string>
+    <string name="title_activity_category_pick">categoryPick</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="cat1">General Knowledge</string>
+    <string name="cat2">Film</string>
+    <string name="cat3">Music</string>
+    <string name="cat4">History</string>
+    <string name="cat5">Art</string>
+    <string name="cat6">sports</string>
+    <string name="cat7">computers</string>
+    <string name="cat8">mythology</string>
+    <string name="cat9">video games</string>
+    <string name="cat10"><![CDATA[science & nature]]></string>
+    <string name="resultText">"You've got answers Correct! "</string>
+    <string name="banner1_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+</resources>
