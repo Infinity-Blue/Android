@@ -2,7 +2,7 @@
 ## Description
 Android quiz application consisting of Multiple-choice questions and answers fetched from Json API for each category
 ##
-<img src="https://user-images.githubusercontent.com/39278189/105622001-c7f44080-5e50-11eb-9856-90f765966ade.png" width= "170" height="70">
+
 
 ## Screenshots
 <p float="left">
