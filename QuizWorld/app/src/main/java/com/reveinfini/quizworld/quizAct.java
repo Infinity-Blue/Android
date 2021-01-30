@@ -148,7 +148,9 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
             case R.id.prev_button:
                 if (currentQuestionIndex <= 1) {
                     onBackPressed();
+                    finish();
                 }
+                else 
                 currentQuestionIndex--;
                 updateQuestion();
                 break;
