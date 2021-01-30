@@ -10,13 +10,15 @@
 
     <Button
         android:id="@+id/opt2"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/false_title"
+        android:text="Button"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
+        android:textSize="@dimen/_11sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,13 +26,15 @@
 
     <Button
         android:id="@+id/opt4"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:background="@color/colorPrimaryDark"
         android:text="Button"
         android:textColor="#FFFFFF"
+        android:textSize="@dimen/_11sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,12 +44,14 @@
 
     <Button
         android:id="@+id/opt3"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/_6sdp"
         android:background="@color/colorPrimaryDark"
         android:text="Button"
         android:textColor="#FFFFFF"
+        android:textSize="@dimen/_11sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,14 +59,17 @@
 
     <Button
         android:id="@+id/opt1"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="20dp"
         android:background="@color/colorPrimaryDark"
         android:text="Button"
         android:textColor="#FFFFFF"
+        android:textSize="@dimen/_11sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
@@ -95,23 +104,24 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:text="QuizWorld"
-        android:textSize="36sp"
+        android:textSize="@dimen/_26sdp"
         app:fontFamily="@font/chewy"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/counter_text"
-        android:layout_width="43dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/counter_questions"
-        android:textSize="15sp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -125,7 +135,7 @@
         android:layout_marginBottom="32dp"
         android:text="TextView"
         android:textColor="#3B1D71"
-        android:textSize="18sp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +151,7 @@
         android:layout_marginTop="11dp"
         android:layout_marginBottom="7dp"
         android:text="TextView"
-        android:textSize="18sp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,14 +161,14 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="@dimen/_290sdp"
-        android:layout_height="@dimen/_133sdp"
-        android:layout_marginTop="116dp"
+        android:layout_height="@dimen/_110sdp"
+        android:layout_marginTop="@dimen/_125sdp"
         app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/question_textview"
@@ -167,16 +177,16 @@
             android:layout_gravity="center_vertical"
             android:paddingLeft="@dimen/_5sdp"
             android:text="TextView"
-            android:textSize="@dimen/_16sdp" />
+            android:textSize="@dimen/_15sdp" />
     </androidx.cardview.widget.CardView>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_49sdp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:adSize="SMART_BANNER"
-        app:adUnitId="ca-app-pub-5560055586644645~1110608367"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="-5dp"
         tools:layout_editor_absoluteY="666dp"></com.google.android.gms.ads.AdView>
