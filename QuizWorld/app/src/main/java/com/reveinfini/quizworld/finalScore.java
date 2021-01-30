@@ -2,6 +2,8 @@ package com.reveinfini.quizworld;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -19,6 +21,8 @@ public class finalScore extends AppCompatActivity {
     private TextView result;
     private TextView scoreView;
     private AdView mAdView;
+    private ImageButton category;
+    private ImageButton home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +42,34 @@ public class finalScore extends AppCompatActivity {
 
         result=findViewById(R.id.resultView);
         scoreView=findViewById(R.id.score);
+        category=findViewById(R.id.catButton);
+        home=findViewById(R.id.homeButton);
+
+        category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(v.getContext(), categoryPick.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(v.getContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         score = bundle.getInt("score");
         correctNbr = bundle.getInt("correctNbr");
-        result.setText("You've got \n" +correctNbr+" answers Correct");
+        result.setText("You've got "+correctNbr+" answers Correct \n" + "out of 10");
         scoreView.setText(String.valueOf(score));
 
     }
+
 
     @Override
     public void onBackPressed() {
