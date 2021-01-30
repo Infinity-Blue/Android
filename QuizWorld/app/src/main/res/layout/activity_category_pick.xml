@@ -29,7 +29,7 @@
                 android:fontFamily="@font/chewy"
                 android:text="Choose Topic"
                 android:textColor="#F4E4E4"
-                android:textSize="@dimen/_24sdp"
+                android:textSize="@dimen/_26sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat1"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <Button
@@ -54,7 +54,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat2"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <Button
@@ -65,7 +65,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat3"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <Button
@@ -76,7 +76,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat4"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <Button
@@ -87,7 +87,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat5"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <Button
@@ -98,7 +98,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat6"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <Button
@@ -109,7 +109,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat7"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <Button
@@ -120,7 +120,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat8"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <Button
@@ -131,7 +131,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat9"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <Button
@@ -140,10 +140,87 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:layout_marginBottom="@dimen/_6sdp"
                 android:background="#ff8c19"
                 android:text="@string/cat10"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/topic11"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="#ff8c19"
+                android:text="@string/cat11"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/topic12"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="#ff8c19"
+                android:text="@string/cat12"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/topic13"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="#ff8c19"
+                android:text="@string/cat13"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/topic14"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="#ff8c19"
+                android:text="@string/cat14"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/topic15"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="#ff8c19"
+                android:text="@string/cat15"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/topic16"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="#ff8c19"
+                android:text="@string/cat16"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/topic17"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:background="#ff8c19"
+                android:text="@string/cat17"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
             <com.google.android.gms.ads.AdView
