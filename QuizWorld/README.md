@@ -2,6 +2,8 @@
 ## Description
 Android quiz application consisting of Multiple-choice questions and answers fetched from Json API for each category
 
+<a href='https://play.google.com/store/apps/details?id=com.reveinfini.quizworld'><img alt='Get it on Google Play' width="170" height="70" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+
 ## Screenshots
 <p float="left">
 <img src="https://user-images.githubusercontent.com/39278189/105449753-54b9c580-5cbc-11eb-8134-36f7382868b1.png" width="200" height="400">
