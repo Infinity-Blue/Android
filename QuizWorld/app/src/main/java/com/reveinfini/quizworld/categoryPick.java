@@ -28,6 +28,14 @@ public class categoryPick<category> extends AppCompatActivity implements View.On
     private Button topic_8;
     private Button topic_9;
     private Button topic_10;
+    private Button topic_11;
+    private Button topic_12;
+    private Button topic_13;
+    private Button topic_14;
+    private Button topic_15;
+    private Button topic_16;
+    private Button topic_17;
+
     int category;
     ConstraintLayout constLay;
     private AdView mAdView;
@@ -58,6 +66,13 @@ public class categoryPick<category> extends AppCompatActivity implements View.On
         topic_8 = findViewById(R.id.topic8);
         topic_9 = findViewById(R.id.topic9);
         topic_10 = findViewById(R.id.topic10);
+        topic_11 = findViewById(R.id.topic11);
+        topic_12 = findViewById(R.id.topic12);
+        topic_13 = findViewById(R.id.topic13);
+        topic_14 = findViewById(R.id.topic14);
+        topic_15 = findViewById(R.id.topic15);
+        topic_16 = findViewById(R.id.topic16);
+        topic_17 = findViewById(R.id.topic17);
 
         topic_1.setOnClickListener(this);
         topic_2.setOnClickListener(this);
@@ -69,6 +84,14 @@ public class categoryPick<category> extends AppCompatActivity implements View.On
         topic_8.setOnClickListener(this);
         topic_9.setOnClickListener(this);
         topic_10.setOnClickListener(this);
+        topic_11.setOnClickListener(this);
+        topic_12.setOnClickListener(this);
+        topic_13.setOnClickListener(this);
+        topic_14.setOnClickListener(this);
+        topic_15.setOnClickListener(this);
+        topic_16.setOnClickListener(this);
+        topic_17.setOnClickListener(this);
+
     }
 
 
@@ -104,7 +127,29 @@ public class categoryPick<category> extends AppCompatActivity implements View.On
                 case R.id.topic10:
                     category=17;
                     break;
+                case R.id.topic11:
+                    category=24;
+                    break;
+                case R.id.topic12:
+                    category=13;
+                    break;
+                case R.id.topic13:
+                    category=19;
+                    break;
+                case R.id.topic14:
+                    category=22;
+                    break;
+                case R.id.topic15:
+                    category=26;
+                    break;
+                case R.id.topic16:
+                    category=10;
+                    break;
+                case R.id.topic17:
+                    category=32;
+                    break;
             }
+
             Intent intent= new Intent(categoryPick.this, quizAct.class);
             intent.putExtra("category", category);
             startActivityForResult(intent,1);
