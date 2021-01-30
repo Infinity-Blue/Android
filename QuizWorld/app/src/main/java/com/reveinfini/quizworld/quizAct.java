@@ -323,7 +323,8 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
 
         else {
             String url = "https://opentdb.com/api.php?amount=10&category=" + category + "&type=multiple";
-            final ProgressDialog dialog = ProgressDialog.show(this, null, "Loading..Please Wait");
+          //  final ProgressDialog dialog = ProgressDialog.show(this, null, "Loading..Please Wait");
+            final ProgressDialog dialog = ProgressDialog.show(new ContextThemeWrapper(this, R.style.DialogCustom), "Loading..","Please Wait");
 
             final JsonObjectRequest jsObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
