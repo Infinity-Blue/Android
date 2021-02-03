@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -150,9 +151,10 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
                     onBackPressed();
                     finish();
                 }
-                else 
-                currentQuestionIndex--;
-                updateQuestion();
+                else {
+                    currentQuestionIndex--;
+                    updateQuestion();
+                }
                 break;
             case R.id.opt1:
                 checkAnswer(questions.get(currentQuestionIndex-1).getOpt1(), 1);
@@ -221,8 +223,8 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         final CardView cardView = findViewById(R.id.cardView);
         AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
 
-        alphaAnimation.setDuration(250);
-        alphaAnimation.setRepeatCount(1);
+        alphaAnimation.setDuration(320);
+        alphaAnimation.setRepeatCount(2);
         alphaAnimation.setRepeatMode(Animation.REVERSE);
         cardView.startAnimation(alphaAnimation);
 
@@ -230,11 +232,16 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onAnimationStart(Animation animation) {
                 cardView.setCardBackgroundColor(Color.GREEN);
+                //disable click until Animation is Over
+                clickable(false, cardView);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
                 cardView.setCardBackgroundColor(Color.WHITE);
+                //Enable click once Animation is over
+                clickable(true, cardView);
+
                 if (currentQuestionIndex == 10) {
                     //   show finalScore();
                     Intent i = new Intent(quizAct.this, finalScore.class);
@@ -246,13 +253,14 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
                     currentQuestionIndex++;
                     updateQuestion();
                 }
-                }
+            }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
             }
         });
     }
+
 
     /*
     @brief  Cardview and the Button pressed shake if the user presses wrong button.
@@ -271,12 +279,16 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
             public void onAnimationStart(Animation animation) {
                 cardView.setCardBackgroundColor(Color.RED);
                 finalAnsButton.setBackgroundColor(Color.RED);
-
+                //disable click until Animation is Over
+                clickable(false, cardView);
             }
+
             @Override
             public void onAnimationEnd(Animation animation) {
                 cardView.setCardBackgroundColor(Color.WHITE);
                 finalAnsButton.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                //Enable click once Animation is over
+                clickable(true, cardView);
 
                 if (currentQuestionIndex == 10) {
                     //   show finalScore();
@@ -289,7 +301,7 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
                     currentQuestionIndex++;
                     updateQuestion();
                 }
-                }
+            }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
@@ -298,9 +310,32 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
+
+    /*
+    @brief  Turning on/off ClickListener
+    @param  b   False if ClickListener is disabled. True if CLickListener is enabled.
+    */
+    private void clickable(boolean b, CardView cardView) {
+        if (b==false) {
+            opt1.setOnClickListener(null);
+            opt2.setOnClickListener(null);
+            opt3.setOnClickListener(null);
+            opt4.setOnClickListener(null);
+        }
+        else
+            //Ensure whether Animation is Over. If so, Click is enabled.
+        if (cardView.getCardBackgroundColor().getDefaultColor()==Color.WHITE) {
+            opt1.setOnClickListener(this);
+            opt2.setOnClickListener(this);
+            opt3.setOnClickListener(this);
+            opt4.setOnClickListener(this);
+        }
+    }
+
+
     /*
     @brief  Show New questions and Answer options(Button) on the screen
-     */
+    */
     private void updateQuestion() {
         q.setText(Html.fromHtml(questions.get(currentQuestionIndex-1).getQuestion()));
         counter.setText(currentQuestionIndex + " / " + questions.size());
@@ -323,9 +358,8 @@ public class quizAct extends AppCompatActivity implements View.OnClickListener {
 
         else {
             String url = "https://opentdb.com/api.php?amount=10&category=" + category + "&type=multiple";
-          //  final ProgressDialog dialog = ProgressDialog.show(this, null, "Loading..Please Wait");
+//            final ProgressDialog dialog = ProgressDialog.show(this, null, "Loading..Please Wait");
             final ProgressDialog dialog = ProgressDialog.show(new ContextThemeWrapper(this, R.style.DialogCustom), "Loading..","Please Wait");
-
             final JsonObjectRequest jsObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
                     url, null, new Response.Listener<JSONObject>() {
