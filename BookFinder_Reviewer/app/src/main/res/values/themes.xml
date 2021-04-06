@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.App" parent="Theme.MaterialComponents">
+        ...
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents</item>
+    </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/BodyTextAppearance.MaterialComponents.Body2</item>
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+    </style>
+</resources>

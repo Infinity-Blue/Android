@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".MainActivity">
+
+<!--    <TextView-->
+<!--        android:id="@+id/dialogTitle"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginTop="@dimen/_20sdp"-->
+<!--        android:textSize="@dimen/_20sdp"-->
+<!--        android:text="Please grant " />-->
+    <TextView
+        android:id="@+id/title_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="Camera"
+        />
+
+    <TextView
+        android:id="@+id/camera_perm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:text="Camera permission is required to capture book image for search" />
+
+    <TextView
+        android:id="@+id/title_disk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/_20sdp"
+        android:text="Access to External storage"/>
+
+    <TextView
+        android:id="@+id/disk_perm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15sdp"
+        android:text="Access to External storage is required to save book image for search" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
